@@ -1,0 +1,58 @@
+---
+import Spark from "./Spark.astro";
+import { cosplays } from "../data/site";
+---
+
+<section id="portfolio" class="relative mx-auto max-w-7xl px-5 py-28 sm:px-8">
+  <div class="mb-14 flex flex-wrap items-end justify-between gap-6">
+    <div>
+      <p data-reveal class="mb-3 flex items-center gap-3 text-[0.7rem] font-medium tracking-[0.35em] text-mist-400 uppercase">
+        <Spark class="size-3 text-ice-400" /> Portfolio
+      </p>
+      <h2 data-reveal style="--reveal-delay: 100ms" class="font-display text-4xl font-bold text-ice-100 sm:text-5xl">
+        Cosplays <span class="text-gradient-ice">destacados</span>
+      </h2>
+    </div>
+    <a
+      data-reveal
+      style="--reveal-delay: 200ms"
+      href="#portfolio"
+      class="text-[0.75rem] font-medium tracking-[0.25em] text-ice-300 uppercase underline-offset-8 transition-all hover:underline"
+    >
+      Ver todos los cosplays →
+    </a>
+  </div>
+
+  <!-- Grilla editorial: alturas alternadas rompen la retícula -->
+  <div class="grid grid-cols-2 gap-4 sm:gap-6 lg:grid-cols-4">
+    {
+      cosplays.map((c, i) => (
+        <a
+          href="#portfolio"
+          data-reveal
+          style={`--reveal-delay: ${(i % 4) * 90}ms`}
+          class={`group relative block overflow-hidden rounded-sm ${i % 2 === 1 ? "lg:translate-y-10" : ""}`}
+        >
+          <img
+            src={c.image}
+            alt={`Cosplay de ${c.name} — ${c.origin}`}
+            class="aspect-[3/4] w-full object-cover transition-transform duration-700 group-hover:scale-105"
+            loading="lazy"
+            width="900"
+            height="1200"
+          />
+          <div class="absolute inset-0 bg-gradient-to-t from-night-950/95 via-night-950/20 to-transparent opacity-80 transition-opacity duration-500 group-hover:opacity-100" />
+          <span class="font-display absolute top-4 left-4 text-sm text-ice-300/50">
+            {String(i + 1).padStart(2, "0")}
+          </span>
+          <div class="absolute inset-x-0 bottom-0 translate-y-2 p-5 transition-transform duration-500 group-hover:translate-y-0">
+            <h3 class="font-display text-xl font-semibold text-ice-100">{c.name}</h3>
+            <p class="mt-1 text-[0.7rem] tracking-[0.2em] text-ice-300/70 uppercase opacity-0 transition-opacity duration-500 group-hover:opacity-100">
+              {c.origin}
+            </p>
+          </div>
+        </a>
+      ))
+    }
+  </div>
+</section>

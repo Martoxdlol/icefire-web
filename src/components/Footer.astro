@@ -1,0 +1,66 @@
+---
+import Logo from "./Logo.astro";
+import Spark from "./Spark.astro";
+import { site, socials, footerColumns } from "../data/site";
+---
+
+<footer id="contacto" class="relative overflow-hidden bg-night-950 pt-24 pb-10">
+  <div class="pointer-events-none absolute inset-0" aria-hidden="true">
+    <div class="absolute -bottom-52 left-1/2 size-[40rem] -translate-x-1/2 rounded-full bg-ice-800/20 blur-[130px]"></div>
+  </div>
+
+  <div class="relative mx-auto max-w-7xl px-5 sm:px-8">
+    <p data-reveal class="font-accent mx-auto mb-20 max-w-2xl text-center text-3xl leading-snug text-ice-100/80 italic sm:text-4xl">
+      “{site.tagline}”
+    </p>
+
+    <div class="grid gap-12 border-t border-white/8 pt-14 lg:grid-cols-[1.3fr_repeat(3,1fr)]">
+      <div>
+        <Logo />
+        <p class="mt-6 text-[0.7rem] font-medium tracking-[0.3em] text-mist-400 uppercase">Hablemos</p>
+        <a
+          href={`mailto:${site.email}`}
+          class="mt-1 inline-block font-light text-ice-300 underline-offset-4 transition-all hover:underline"
+        >
+          {site.email}
+        </a>
+        <div class="mt-6 flex items-center gap-3">
+          {
+            socials.map((s) => (
+              <a
+                href={s.href}
+                aria-label={s.label}
+                class="grid size-9 place-items-center rounded-full border border-white/10 text-[0.65rem] font-semibold tracking-widest text-ice-100/60 transition-all hover:border-ice-400 hover:text-ice-300"
+              >
+                {s.short}
+              </a>
+            ))
+          }
+        </div>
+      </div>
+
+      {
+        footerColumns.map((col) => (
+          <nav aria-label={col.title}>
+            <h3 class="mb-5 flex items-center gap-2 text-[0.7rem] font-medium tracking-[0.3em] text-mist-400 uppercase">
+              <Spark class="size-2.5 text-ice-500/60" /> {col.title}
+            </h3>
+            <ul class="space-y-3">
+              {col.links.map((link) => (
+                <li>
+                  <a href="#top" class="font-light text-ice-100/60 transition-colors hover:text-ice-300">
+                    {link}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </nav>
+        ))
+      }
+    </div>
+
+    <p class="mt-16 border-t border-white/8 pt-8 text-center text-xs font-light tracking-wide text-mist-400">
+      © 2025 {site.fullName} | Todos los derechos reservados
+    </p>
+  </div>
+</footer>

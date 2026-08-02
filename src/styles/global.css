@@ -1,0 +1,165 @@
+@import "tailwindcss";
+
+@theme {
+  /* Tipografía — Cinzel hace eco de las serifas talladas del logo,
+     Jost del "COSPLAY" espaciado, Cormorant para acentos editoriales */
+  --font-display: "Cinzel", "Georgia", serif;
+  --font-accent: "Cormorant Garamond", "Georgia", serif;
+  --font-sans: "Jost", "Avenir Next", sans-serif;
+
+  /* Noche — carbón de la hoja de marca */
+  --color-night-950: #0a0b0e;
+  --color-night-900: #101216;
+  --color-night-850: #15171c;
+  --color-night-800: #1b1e24;
+  --color-night-700: #262a33;
+  --color-night-600: #363b47;
+
+  /* Hielo — celeste del logo */
+  --color-ice-100: #eaf4fb;
+  --color-ice-200: #cfe6f6;
+  --color-ice-300: #b3d8f0;
+  --color-ice-400: #8fc3e8;
+  --color-ice-500: #67a7d8;
+  --color-ice-600: #4a86bd;
+  --color-ice-700: #3a689a;
+  --color-ice-800: #2b4a70;
+  --color-ice-900: #22344f;
+
+  /* Fuego — acento ember, usado con cuentagotas */
+  --color-ember-300: #f4b48d;
+  --color-ember-400: #eb9663;
+  --color-ember-500: #de7a41;
+  --color-ember-600: #b95c2a;
+
+  /* Oro — reservado para los premios */
+  --color-gold-300: #ecd6a4;
+  --color-gold-400: #d9b36a;
+  --color-gold-500: #b98f45;
+
+  /* Bruma — violeta pizarra del círculo del logo */
+  --color-mist-400: #8d8fa8;
+  --color-mist-600: #5d5f78;
+  --color-mist-800: #33344a;
+}
+
+::selection {
+  background: var(--color-ice-400);
+  color: var(--color-night-950);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-night-900);
+  color: var(--color-ice-100);
+  font-family: var(--font-sans);
+  overflow-x: hidden;
+}
+
+/* Grano sutil sobre todo el sitio */
+.grain::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  pointer-events: none;
+  opacity: 0.05;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Degradados de texto */
+.text-gradient-ice {
+  background: linear-gradient(160deg, #f2f9ff 10%, var(--color-ice-300) 45%, var(--color-ice-600) 90%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.text-gradient-ember {
+  background: linear-gradient(160deg, var(--color-ember-300) 5%, var(--color-ember-500) 55%, var(--color-ember-600) 95%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.text-gradient-gold {
+  background: linear-gradient(160deg, #f6e8c6 5%, var(--color-gold-400) 50%, var(--color-gold-500) 95%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Marquee de sponsors */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+.marquee-track {
+  animation: marquee 36s linear infinite;
+}
+
+.marquee:hover .marquee-track {
+  animation-play-state: paused;
+}
+
+/* Destello de la estrella del logo */
+@keyframes twinkle {
+  0%, 100% { opacity: 0.25; transform: scale(0.85); }
+  50% { opacity: 1; transform: scale(1); }
+}
+
+.twinkle {
+  animation: twinkle 3.2s ease-in-out infinite;
+}
+
+/* Flotado suave */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+
+.float {
+  animation: float 7s ease-in-out infinite;
+}
+
+/* Indicador de scroll */
+@keyframes scroll-cue {
+  0% { transform: translateY(0); opacity: 1; }
+  70% { transform: translateY(10px); opacity: 0; }
+  100% { transform: translateY(0); opacity: 0; }
+}
+
+.scroll-cue::after {
+  content: "";
+  display: block;
+  width: 1px;
+  height: 2.5rem;
+  margin-inline: auto;
+  background: linear-gradient(to bottom, var(--color-ice-300), transparent);
+  animation: scroll-cue 2.2s ease-in-out infinite;
+}
+
+/* Reveal on scroll */
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(28px);
+  transition:
+    opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+
+[data-reveal].in-view {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  [data-reveal] { opacity: 1; transform: none; transition: none; }
+  .marquee-track, .twinkle, .float, .scroll-cue::after { animation: none; }
+}

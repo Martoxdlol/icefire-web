@@ -1,0 +1,29 @@
+---
+import Spark from "./Spark.astro";
+import { sponsors } from "../data/site";
+
+const track = [...sponsors, ...sponsors];
+---
+
+<section class="border-y border-white/5 bg-night-850/60 py-10" aria-label="Sponsors">
+  <p class="mb-7 text-center text-[0.7rem] font-medium tracking-[0.35em] text-mist-400 uppercase">
+    Orgullosamente trabajé con
+  </p>
+  <div
+    class="marquee overflow-hidden"
+    style="mask-image: linear-gradient(to right, transparent, black 12%, black 88%, transparent);"
+  >
+    <div class="marquee-track flex w-max items-center">
+      {
+        track.map((brand) => (
+          <span class="flex items-center gap-10 pr-10">
+            <span class="font-display text-2xl font-medium whitespace-nowrap text-ice-100/45 transition-colors hover:text-ice-300">
+              {brand}
+            </span>
+            <Spark class="size-2.5 shrink-0 text-ice-500/40" />
+          </span>
+        ))
+      }
+    </div>
+  </div>
+</section>

@@ -1,0 +1,66 @@
+---
+import Spark from "./Spark.astro";
+import { creator } from "../data/site";
+---
+
+<section id="contenido" class="relative overflow-hidden border-y border-white/5 bg-night-950 py-28">
+  <div class="pointer-events-none absolute inset-0" aria-hidden="true">
+    <div class="absolute -bottom-32 -left-32 size-[34rem] rounded-full bg-ice-700/12 blur-[120px]"></div>
+    <div class="absolute -top-32 -right-32 size-[30rem] rounded-full bg-ember-600/8 blur-[120px]"></div>
+  </div>
+
+  <div class="relative mx-auto max-w-7xl px-5 sm:px-8">
+    <div class="grid items-end gap-12 lg:grid-cols-[1fr_1fr]">
+      <div>
+        <p data-reveal class="mb-3 flex items-center gap-3 text-[0.7rem] font-medium tracking-[0.35em] text-mist-400 uppercase">
+          <Spark class="size-3 text-ice-400" /> Creadora de
+        </p>
+        <h2 data-reveal style="--reveal-delay: 100ms" class="font-display text-5xl font-bold sm:text-6xl">
+          <span class="text-gradient-ice">Contenido</span>
+        </h2>
+        <p data-reveal style="--reveal-delay: 200ms" class="mt-6 max-w-md text-lg leading-relaxed font-light text-ice-100/70">
+          {creator.copy}
+        </p>
+        <a
+          data-reveal
+          style="--reveal-delay: 300ms"
+          href="#contenido"
+          class="mt-8 inline-block rounded-full border border-white/15 px-8 py-3.5 text-[0.8rem] font-medium tracking-[0.2em] text-ice-100/80 uppercase transition-colors hover:border-ice-400 hover:text-ice-300"
+        >
+          Ver más
+        </a>
+      </div>
+
+      <!-- Tira de capturas, ligeramente desfasadas -->
+      <div class="grid grid-cols-3 gap-4">
+        {
+          creator.images.map((src, i) => (
+            <img
+              data-reveal
+              style={`--reveal-delay: ${i * 120}ms`}
+              src={src}
+              alt={`Contenido de Ice Fire Cosplay ${i + 1}`}
+              class={`aspect-[9/16] w-full rounded-sm object-cover ${i === 1 ? "lg:-translate-y-8" : ""}`}
+              loading="lazy"
+              width="450"
+              height="800"
+            />
+          ))
+        }
+      </div>
+    </div>
+
+    <!-- Métricas por plataforma -->
+    <dl class="mt-20 grid grid-cols-2 gap-px overflow-hidden rounded-sm border border-white/8 bg-white/8 lg:grid-cols-4">
+      {
+        creator.metrics.map((m, i) => (
+          <div data-reveal style={`--reveal-delay: ${i * 90}ms`} class="flex flex-col bg-night-900 px-8 py-9 text-center">
+            <dt class="order-2 mt-2 text-[0.7rem] font-medium tracking-[0.3em] text-mist-400 uppercase">{m.platform}</dt>
+            <dd class="order-1 font-display text-gradient-ice text-4xl font-bold sm:text-5xl">{m.value}</dd>
+            <dd class="order-3 mt-1 text-sm font-light text-ice-100/50">{m.unit}</dd>
+          </div>
+        ))
+      }
+    </dl>
+  </div>
+</section>
