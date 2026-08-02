@@ -1,0 +1,58 @@
+---
+import Logo from "./Logo.astro";
+import SocialLinks from "./SocialLinks.astro";
+
+const links = [
+  { href: "#inicio", label: "Inicio" },
+  { href: "#cosplays", label: "Cosplays" },
+  { href: "#premios", label: "Premios" },
+  { href: "#eventos", label: "Eventos" },
+  { href: "#prensa", label: "Prensa" },
+  { href: "#contenido", label: "Contenido" },
+];
+---
+
+<footer class="border-t border-white/8 bg-[#07080b]">
+  <div class="mx-auto grid max-w-7xl gap-12 px-6 py-16 md:grid-cols-3">
+    <div>
+      <Logo />
+      <p class="mt-6 max-w-xs text-[0.8rem] leading-relaxed text-white/45">
+        Cosplay es más que vestirse.<br />Es contar historias que inspiran.
+      </p>
+    </div>
+
+    <nav aria-label="Secciones" class="md:justify-self-center">
+      <ul class="space-y-3">
+        {
+          links.map((link) => (
+            <li>
+              <a
+                href={link.href}
+                class="text-[0.64rem] uppercase tracking-[0.3em] text-white/50 transition-colors duration-300 hover:text-ice"
+              >
+                {link.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+
+    <div class="md:justify-self-end md:text-right">
+      <p class="text-[0.64rem] uppercase tracking-[0.36em] text-white/40">Hablemos</p>
+      <a
+        href="mailto:icefire.cosplay@gmail.com"
+        class="mt-3 inline-block border-b border-ice/40 pb-1 font-display text-lg text-ice/90 transition-colors duration-300 hover:text-ice-bright"
+      >
+        icefire.cosplay@gmail.com
+      </a>
+      <SocialLinks class="mt-8 md:justify-end" />
+    </div>
+  </div>
+
+  <div class="border-t border-white/5">
+    <p class="mx-auto max-w-7xl px-6 py-6 text-center text-[0.58rem] uppercase tracking-[0.3em] text-white/30">
+      © 2026 Ice Fire Cosplay · Todos los derechos reservados
+    </p>
+  </div>
+</footer>

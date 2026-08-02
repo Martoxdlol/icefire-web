@@ -1,0 +1,48 @@
+---
+import Star from "./Star.astro";
+
+// Wordmarks tipográficos; reemplazar por los logos oficiales cuando estén los assets
+const brands = [
+  { name: "AMD", class: "font-black italic tracking-tight" },
+  { name: "JBL", class: "font-extrabold tracking-[0.08em]" },
+  { name: "XBOX", class: "font-bold tracking-[0.18em]" },
+  { name: "AORUS", class: "font-semibold italic tracking-[0.3em]" },
+  { name: "SHARKOON", class: "font-bold tracking-[0.2em]" },
+  { name: "BANIFOX", class: "font-semibold tracking-[0.14em]" },
+  { name: "PRINTALOT", class: "font-bold tracking-[0.1em]" },
+  { name: "CREALITY", class: "font-semibold tracking-[0.26em]" },
+  { name: "ETERNA", class: "font-light tracking-[0.42em]" },
+];
+---
+
+<section aria-label="Marcas con las que trabajé" class="border-y border-white/8 bg-ink py-14">
+  <p
+    class="flex items-center justify-center gap-4 text-[0.6rem] uppercase tracking-[0.44em] text-white/40"
+    data-reveal
+  >
+    <span class="hidden h-px w-12 bg-white/15 sm:block"></span>
+    Orgullosamente trabajé con
+    <Star class="w-2 text-ice/60" />
+    <span class="hidden h-px w-12 bg-white/15 sm:block"></span>
+  </p>
+
+  <div
+    class="mt-10 overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_12%,black_88%,transparent)]"
+  >
+    <div class="flex w-max items-center gap-20 animate-marquee hover:[animation-play-state:paused]">
+      {
+        [false, true].map((clone) => (
+          <ul class="flex items-center gap-20" aria-hidden={clone}>
+            {brands.map((brand) => (
+              <li
+                class={`whitespace-nowrap text-xl text-white/40 transition-colors duration-300 hover:text-ice ${brand.class}`}
+              >
+                {brand.name}
+              </li>
+            ))}
+          </ul>
+        ))
+      }
+    </div>
+  </div>
+</section>

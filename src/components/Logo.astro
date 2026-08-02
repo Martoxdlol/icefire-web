@@ -1,0 +1,17 @@
+---
+import Star from "./Star.astro";
+
+const { class: className = "" } = Astro.props;
+---
+
+<a href="#inicio" class={`group inline-flex flex-col items-center leading-none ${className}`}>
+  <span class="relative font-display text-[1.65rem] font-semibold tracking-[0.14em] text-ice">
+    I<span class="relative inline-block"
+      >C<Star
+        class="absolute left-1/2 top-1/2 w-[1.4em] -translate-x-1/2 -translate-y-1/2 text-ice-bright/90 transition-transform duration-500 group-hover:rotate-45"
+      /></span
+    >E
+  </span>
+  <span class="mt-1 text-[0.5rem] uppercase tracking-[0.62em] text-white/55">Cosplay</span>
+  <span class="sr-only">Ice Fire Cosplay — inicio</span>
+</a>

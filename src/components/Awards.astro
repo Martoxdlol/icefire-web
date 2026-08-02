@@ -1,0 +1,51 @@
+---
+import Star from "./Star.astro";
+---
+
+<section id="premios" class="relative scroll-mt-16 overflow-hidden bg-cream text-coal">
+  <!-- Estrella-brújula de marca de agua -->
+  <Star class="pointer-events-none absolute -right-24 top-1/2 w-[420px] -translate-y-1/2 text-cream-deep" />
+
+  <div class="relative mx-auto grid max-w-7xl items-center gap-14 px-6 py-24 lg:grid-cols-[1.1fr_1fr] lg:gap-20 lg:py-32">
+    <div data-reveal>
+      <p class="flex items-center gap-3 text-[0.64rem] uppercase tracking-[0.4em] text-navy/70">
+        Reconocida por la industria <Star class="w-2 text-navy/60" />
+      </p>
+      <h2 class="mt-8 font-display text-6xl font-semibold leading-[0.92] tracking-[0.02em] sm:text-7xl lg:text-8xl">
+        MARTÍN<br />FIERRO
+        <span class="mt-2 block font-display text-4xl font-medium italic tracking-normal text-coal/80 sm:text-5xl lg:text-6xl">
+          Digital 2024
+        </span>
+      </h2>
+      <p class="mt-6 text-[0.78rem] uppercase tracking-[0.42em] text-steel">
+        Cosmaker del año
+      </p>
+      <p class="mt-8 max-w-md text-[0.95rem] leading-relaxed text-coal/70">
+        Mi trabajo fue reconocido por APTRA con el premio Martín Fierro Digital como Cosmaker del
+        Año, destacando mi trayectoria y aporte al mundo del cosplay y la creación de contenido.
+      </p>
+      <a
+        href="#"
+        class="group mt-10 inline-flex items-center gap-3 border border-coal/30 px-8 py-4 text-[0.66rem] uppercase tracking-[0.32em] text-coal transition-colors duration-300 hover:bg-coal hover:text-cream"
+      >
+        Ver la historia
+        <span class="transition-transform duration-300 group-hover:translate-x-1.5">→</span>
+      </a>
+    </div>
+
+    <div class="relative" data-reveal style="--reveal-delay:150ms">
+      <div class="absolute -left-4 -top-4 h-full w-full border border-coal/20" aria-hidden="true"></div>
+      <img
+        src="/images/award.svg"
+        alt="Camila con la estatuilla del Martín Fierro Digital 2024"
+        width="900"
+        height="1100"
+        loading="lazy"
+        class="relative w-full object-cover"
+      />
+      <p class="mt-4 flex items-center gap-3 text-[0.58rem] uppercase tracking-[0.3em] text-coal/50">
+        <Star class="w-2 text-coal/40" /> APTRA · Buenos Aires · 2024
+      </p>
+    </div>
+  </div>
+</section>

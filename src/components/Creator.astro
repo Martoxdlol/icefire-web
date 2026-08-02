@@ -1,0 +1,97 @@
+---
+import Star from "./Star.astro";
+import SocialIcon from "./SocialIcon.astro";
+
+const stats = [
+  { icon: "instagram", value: "3.5K+", label: "Seguidores" },
+  { icon: "tiktok", value: "100K+", label: "Seguidores" },
+  { icon: "youtube", value: "200K+", label: "Views mensuales" },
+  { icon: "twitch", value: "15K+", label: "Seguidores" },
+] as const;
+
+const polaroids = [
+  { img: "/images/creator/creator-1.svg", class: "-rotate-6 left-0 top-8 z-10" },
+  { img: "/images/creator/creator-2.svg", class: "rotate-2 left-1/2 top-0 z-20 -translate-x-1/2" },
+  { img: "/images/creator/creator-3.svg", class: "rotate-[5deg] right-0 top-12 z-10" },
+];
+---
+
+<section id="contenido" class="relative scroll-mt-16 overflow-hidden">
+  <!-- Atmósfera azul streaming -->
+  <div class="pointer-events-none absolute inset-0" aria-hidden="true">
+    <div
+      class="absolute right-[-10%] top-[-20%] h-[60vh] w-[60vw] rounded-full bg-navy/40 blur-[140px]"
+    >
+    </div>
+    <Star class="absolute left-[6%] top-[18%] w-2.5 text-ice/40 animate-twinkle" />
+    <Star class="absolute right-[10%] bottom-[20%] w-2 text-ice/30 animate-twinkle [animation-delay:1.6s]" />
+  </div>
+
+  <div
+    class="relative mx-auto grid max-w-7xl items-center gap-16 px-6 py-24 lg:grid-cols-[1fr_1.2fr_0.8fr] lg:gap-12 lg:py-32"
+  >
+    <div data-reveal>
+      <p class="flex items-center gap-3 text-[0.64rem] uppercase tracking-[0.4em] text-steel">
+        Más que cosplay <Star class="w-2 text-ice/70" />
+      </p>
+      <h2 class="mt-6">
+        <span class="block font-script text-4xl text-ice">creadora de</span>
+        <span class="mt-1 block font-display text-6xl font-medium tracking-[0.04em] text-white/90 sm:text-7xl"
+          >CONTENIDO</span
+        >
+      </h2>
+      <p class="mt-8 max-w-sm text-[0.9rem] leading-relaxed text-white/60">
+        Creo contenido que entretiene, inspira y genera comunidad en múltiples plataformas: detrás
+        de escena, procesos de armado, streams y colaboraciones con marcas.
+      </p>
+      <a
+        href="#"
+        class="group mt-10 inline-flex items-center gap-3 border border-white/25 px-8 py-4 text-[0.66rem] uppercase tracking-[0.32em] text-white/80 transition-colors duration-300 hover:border-ice hover:text-ice"
+      >
+        Ver más
+        <span class="transition-transform duration-300 group-hover:translate-x-1.5">→</span>
+      </a>
+    </div>
+
+    <!-- Collage estilo polaroid -->
+    <div class="relative mx-auto h-[340px] w-full max-w-md sm:h-[380px]" data-reveal style="--reveal-delay:150ms">
+      {
+        polaroids.map((polaroid, i) => (
+          <figure
+            class={`absolute w-44 bg-cream p-2.5 pb-9 shadow-[0_24px_60px_-12px_rgba(0,0,0,0.7)] transition-transform duration-500 hover:z-30 hover:scale-105 sm:w-52 ${polaroid.class}`}
+          >
+            <span
+              class="absolute -top-2.5 left-1/2 h-5 w-16 -translate-x-1/2 rotate-[-3deg] bg-ice/30 backdrop-blur-sm"
+              aria-hidden="true"
+            />
+            <img
+              src={polaroid.img}
+              alt={`Creación de contenido, foto ${i + 1}`}
+              width="800"
+              height="800"
+              loading="lazy"
+              class="aspect-square w-full object-cover"
+            />
+          </figure>
+        ))
+      }
+    </div>
+
+    <!-- Stats por plataforma -->
+    <ul class="divide-y divide-white/10 border-y border-white/10" data-reveal style="--reveal-delay:280ms">
+      {
+        stats.map((stat) => (
+          <li class="flex items-center gap-5 py-5">
+            <span class="flex size-10 items-center justify-center border border-white/15 text-ice">
+              <SocialIcon name={stat.icon} class="w-4" />
+            </span>
+            <div>
+              <p class="font-display text-3xl font-medium leading-none text-white/90">{stat.value}</p>
+              <p class="mt-1.5 text-[0.58rem] uppercase tracking-[0.3em] text-white/45">{stat.label}</p>
+            </div>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>
