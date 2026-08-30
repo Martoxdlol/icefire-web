@@ -5,6 +5,9 @@
   --color-ink: #0a0c10;
   --color-ink-soft: #10141b;
   --color-ink-card: #141922;
+  --color-cream: #ede6d8;
+  --color-cream-deep: #e0d6c2;
+  --color-coal: #201b14;
   --color-ice: #a9cde8;
   --color-ice-bright: #d9ebf8;
   --color-steel: #7392ad;
@@ -12,6 +15,7 @@
 
   --font-display: "Cormorant Garamond", Georgia, "Times New Roman", serif;
   --font-body: "Jost", "Avenir Next", "Century Gothic", sans-serif;
+  --font-script: "Ms Madi", "Segoe Script", cursive;
 
   --animate-marquee: marquee 42s linear infinite;
   --animate-twinkle: twinkle 3.4s ease-in-out infinite;
