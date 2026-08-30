@@ -1,97 +1,102 @@
 ---
 import Star from "./Star.astro";
-import SocialIcon from "./SocialIcon.astro";
 
-const stats = [
-  { icon: "instagram", value: "3.5K+", label: "Seguidores" },
-  { icon: "tiktok", value: "100K+", label: "Seguidores" },
-  { icon: "youtube", value: "200K+", label: "Views mensuales" },
-  { icon: "twitch", value: "15K+", label: "Seguidores" },
-] as const;
+// Qué puedo ofrecer, cada servicio con su foto
+// TODO: reemplazar los SVG placeholder por fotos reales de cada tipo de contenido
+const offerings = [
+  { label: "Reels / Fotos", img: "/images/creator/creator-1.svg" },
+  { label: "Unboxings", img: "/images/creator/creator-2.svg" },
+  { label: "Reviews", img: "/images/creator/creator-3.svg" },
+  { label: "Diseño", img: "/images/events/event-5.svg" },
+  { label: "Presencias", img: "/images/events/event-1.svg" },
+  { label: "Estética cuidada", img: "/images/events/event-6.svg" },
+];
 
-const polaroids = [
-  { img: "/images/creator/creator-1.svg", class: "-rotate-6 left-0 top-8 z-10" },
-  { img: "/images/creator/creator-2.svg", class: "rotate-2 left-1/2 top-0 z-20 -translate-x-1/2" },
-  { img: "/images/creator/creator-3.svg", class: "rotate-[5deg] right-0 top-12 z-10" },
+// Métricas del media kit (diciembre a febrero)
+const metrics = [
+  { value: "321.000", label: "visualizaciones" },
+  { value: "16.350", label: "interacciones" },
+  { value: "70%", label: "del alcance es público nuevo" },
+  { value: "3.5K", label: "seguidores en Instagram" },
+  { value: "AR · UY · EEUU", label: "países principales" },
 ];
 ---
 
-<section id="contenido" class="relative scroll-mt-16 overflow-hidden">
+<section id="contenido" class="relative scroll-mt-16 overflow-hidden py-24 lg:py-32">
   <!-- Atmósfera azul streaming -->
   <div class="pointer-events-none absolute inset-0" aria-hidden="true">
-    <div
-      class="absolute right-[-10%] top-[-20%] h-[60vh] w-[60vw] rounded-full bg-navy/40 blur-[140px]"
-    >
-    </div>
-    <Star class="absolute left-[6%] top-[18%] w-2.5 text-ice/40 animate-twinkle" />
-    <Star class="absolute right-[10%] bottom-[20%] w-2 text-ice/30 animate-twinkle [animation-delay:1.6s]" />
+    <div class="absolute -bottom-32 -left-32 h-[34rem] w-[34rem] rounded-full bg-navy/40 blur-[130px]"></div>
+    <div class="absolute -top-32 -right-32 h-[28rem] w-[28rem] rounded-full bg-steel/15 blur-[130px]"></div>
+    <Star class="absolute left-[6%] top-[16%] w-2.5 text-ice/40 animate-twinkle" />
+    <Star class="absolute right-[9%] bottom-[24%] w-2 text-ice/30 animate-twinkle [animation-delay:1.6s]" />
   </div>
 
-  <div
-    class="relative mx-auto grid max-w-7xl items-center gap-16 px-6 py-24 lg:grid-cols-[1fr_1.2fr_0.8fr] lg:gap-12 lg:py-32"
-  >
-    <div data-reveal>
-      <p class="flex items-center gap-3 text-[0.64rem] uppercase tracking-[0.4em] text-steel">
-        Más que cosplay <Star class="w-2 text-ice/70" />
+  <div class="relative mx-auto max-w-7xl px-6">
+    <div class="flex flex-wrap items-end justify-between gap-6" data-reveal>
+      <div>
+        <p class="flex items-center gap-3 text-[0.64rem] uppercase tracking-[0.4em] text-steel">
+          Más que cosplay <Star class="w-2 text-ice/70" />
+        </p>
+        <h2 class="mt-6">
+          <span class="block font-script text-4xl text-ice">creadora de</span>
+          <span class="mt-1 block font-display text-[clamp(2.4rem,10vw,6rem)] font-medium leading-none tracking-[0.04em] text-white/90">
+            CONTENIDO
+          </span>
+        </h2>
+      </div>
+      <p class="max-w-xs text-[0.72rem] leading-loose tracking-[0.22em] text-white/60 uppercase lg:text-right">
+        Gaming, tecnología, cosplay y arte, con estética cuidada.
       </p>
-      <h2 class="mt-6">
-        <span class="block font-script text-4xl text-ice">creadora de</span>
-        <span class="mt-1 block font-display text-6xl font-medium tracking-[0.04em] text-white/90 sm:text-7xl"
-          >CONTENIDO</span
-        >
-      </h2>
-      <p class="mt-8 max-w-sm text-[0.9rem] leading-relaxed text-white/60">
-        Creo contenido que entretiene, inspira y genera comunidad en múltiples plataformas: detrás
-        de escena, procesos de armado, streams y colaboraciones con marcas.
-      </p>
-      <a
-        href="#"
-        class="group mt-10 inline-flex items-center gap-3 border border-white/25 px-8 py-4 text-[0.66rem] uppercase tracking-[0.32em] text-white/80 transition-colors duration-300 hover:border-ice hover:text-ice"
-      >
-        Ver más
-        <span class="transition-transform duration-300 group-hover:translate-x-1.5">→</span>
-      </a>
     </div>
 
-    <!-- Collage estilo polaroid -->
-    <div class="relative mx-auto h-[340px] w-full max-w-md sm:h-[380px]" data-reveal style="--reveal-delay:150ms">
+    <!-- Mosaico de servicios: la foto manda, el texto acompaña -->
+    <div class="mt-14 grid grid-cols-2 gap-4 sm:gap-5 lg:grid-cols-3 lg:gap-6">
       {
-        polaroids.map((polaroid, i) => (
+        offerings.map((offering, i) => (
           <figure
-            class={`absolute w-44 bg-cream p-2.5 pb-9 shadow-[0_24px_60px_-12px_rgba(0,0,0,0.7)] transition-transform duration-500 hover:z-30 hover:scale-105 sm:w-52 ${polaroid.class}`}
+            data-reveal
+            style={`--reveal-delay:${(i % 3) * 100}ms`}
+            class={`group relative overflow-hidden border border-white/10 bg-ink-card transition-colors duration-500 hover:border-ice/50 ${
+              i % 3 === 1 ? "lg:translate-y-10" : ""
+            }`}
           >
-            <span
-              class="absolute -top-2.5 left-1/2 h-5 w-16 -translate-x-1/2 rotate-[-3deg] bg-ice/30 backdrop-blur-sm"
-              aria-hidden="true"
-            />
-            <img
-              src={polaroid.img}
-              alt={`Creación de contenido, foto ${i + 1}`}
-              width="800"
-              height="800"
-              loading="lazy"
-              class="aspect-square w-full object-cover"
-            />
+            <div class="aspect-[3/4] overflow-hidden">
+              <img
+                src={offering.img}
+                alt={`${offering.label} — contenido de Ice Fire Cosplay`}
+                width="900"
+                height="1200"
+                loading="lazy"
+                class="h-full w-full object-cover opacity-90 transition duration-700 ease-out group-hover:scale-[1.05] group-hover:opacity-100"
+              />
+            </div>
+            <div class="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink via-ink/15 to-transparent" />
+            <figcaption class="absolute inset-x-0 bottom-0 p-5">
+              <Star class="w-2.5 text-ice/0 transition-all duration-500 group-hover:rotate-90 group-hover:text-ice" />
+              <p class="mt-2 font-display text-base font-medium tracking-[0.06em] text-white uppercase sm:text-xl lg:text-2xl">
+                {offering.label}
+              </p>
+            </figcaption>
           </figure>
         ))
       }
     </div>
 
-    <!-- Stats por plataforma -->
-    <ul class="divide-y divide-white/10 border-y border-white/10" data-reveal style="--reveal-delay:280ms">
-      {
-        stats.map((stat) => (
-          <li class="flex items-center gap-5 py-5">
-            <span class="flex size-10 items-center justify-center border border-white/15 text-ice">
-              <SocialIcon name={stat.icon} class="w-4" />
-            </span>
-            <div>
-              <p class="font-display text-3xl font-medium leading-none text-white/90">{stat.value}</p>
-              <p class="mt-1.5 text-[0.58rem] uppercase tracking-[0.3em] text-white/45">{stat.label}</p>
-            </div>
-          </li>
-        ))
-      }
-    </ul>
+    <!-- Métricas, discretas al pie de la sección -->
+    <div data-reveal class="mt-20 border-t border-white/10 pt-7 lg:mt-28">
+      <div class="flex flex-wrap items-baseline gap-x-12 gap-y-5">
+        <p class="text-[0.56rem] uppercase tracking-[0.36em] text-white/35">
+          Métricas & alcance<span class="ml-3 text-white/25">dic – feb</span>
+        </p>
+        {
+          metrics.map((metric) => (
+            <p class="flex items-baseline gap-2.5">
+              <span class="font-display text-lg text-ice/80">{metric.value}</span>
+              <span class="text-[0.58rem] uppercase tracking-[0.22em] text-white/40">{metric.label}</span>
+            </p>
+          ))
+        }
+      </div>
+    </div>
   </div>
 </section>

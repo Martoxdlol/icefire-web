@@ -1,51 +1,103 @@
 ---
 import Star from "./Star.astro";
+
+// TODO: reemplazar los SVG placeholder por las fotos reales de cada premio
+const otherAwards = [
+  {
+    img: "/images/events/event-2.svg",
+    title: "Bicampeona · Logitech G",
+    note: "Concurso de cosplay",
+  },
+  {
+    img: "/images/events/event-3.svg",
+    title: "Jurado ×2 · AGS Flow",
+    note: "Concurso de cosplay · Argentina Game Show",
+  },
+  {
+    img: "/images/events/event-4.svg",
+    title: "Nominada 2 años consecutivos",
+    note: "Martín Fierro Digital",
+  },
+];
 ---
 
-<section id="premios" class="relative scroll-mt-16 overflow-hidden bg-cream text-coal">
-  <!-- Estrella-brújula de marca de agua -->
-  <Star class="pointer-events-none absolute -right-24 top-1/2 w-[420px] -translate-y-1/2 text-cream-deep" />
+<section id="premios" class="relative scroll-mt-16 overflow-hidden border-y border-white/5 bg-ink-soft py-24 lg:py-32">
+  <!-- Halo dorado del premio -->
+  <div class="pointer-events-none absolute inset-0" aria-hidden="true">
+    <div class="absolute left-1/2 top-1/4 size-[36rem] -translate-x-1/2 rounded-full bg-gold/10 blur-[120px]"></div>
+  </div>
 
-  <div class="relative mx-auto grid max-w-7xl items-center gap-14 px-6 py-24 lg:grid-cols-[1.1fr_1fr] lg:gap-20 lg:py-32">
-    <div data-reveal>
-      <p class="flex items-center gap-3 text-[0.64rem] uppercase tracking-[0.4em] text-navy/70">
-        Reconocida por la industria <Star class="w-2 text-navy/60" />
+  <div class="relative mx-auto grid max-w-7xl items-center gap-16 px-6 lg:grid-cols-[1fr_1.1fr]">
+    <div data-reveal class="relative mx-auto w-full max-w-sm">
+      <div class="absolute -inset-3 border border-gold/25" aria-hidden="true"></div>
+      <img
+        src="/images/award.svg"
+        alt="Camila con la estatuilla del Martín Fierro Digital, Cosmaker del Año"
+        class="relative aspect-[10/13] w-full object-cover"
+        loading="lazy"
+        width="1000"
+        height="1300"
+      />
+      <Star class="absolute -left-5 -top-5 w-8 text-gold animate-twinkle" />
+      <Star class="absolute -bottom-4 -right-4 w-4 text-gold/60 animate-twinkle [animation-delay:1.4s]" />
+    </div>
+
+    <div>
+      <p data-reveal class="flex items-center gap-3 text-[0.7rem] uppercase tracking-[0.35em] text-gold">
+        <Star class="w-3" /> Reconocida por la industria
       </p>
-      <h2 class="mt-8 font-display text-6xl font-semibold leading-[0.92] tracking-[0.02em] sm:text-7xl lg:text-8xl">
-        MARTÍN<br />FIERRO
-        <span class="mt-2 block font-display text-4xl font-medium italic tracking-normal text-coal/80 sm:text-5xl lg:text-6xl">
-          Digital 2024
-        </span>
+      <h2 data-reveal style="--reveal-delay:100ms" class="mt-4 font-display text-4xl font-semibold leading-tight text-white/90 sm:text-5xl">
+        Martín Fierro Digital
+        <span class="text-gradient-gold mt-2 block text-3xl sm:text-4xl">Cosmaker del Año</span>
       </h2>
-      <p class="mt-6 text-[0.78rem] uppercase tracking-[0.42em] text-steel">
-        Cosmaker del año
-      </p>
-      <p class="mt-8 max-w-md text-[0.95rem] leading-relaxed text-coal/70">
+      <p data-reveal style="--reveal-delay:200ms" class="mt-6 max-w-lg text-[0.95rem] leading-relaxed text-white/60">
         Mi trabajo fue reconocido por APTRA con el premio Martín Fierro Digital como Cosmaker del
-        Año, destacando mi trayectoria y aporte al mundo del cosplay y la creación de contenido.
+        Año en 2023, con una segunda nominación consecutiva, destacando mi trayectoria y aporte al
+        mundo del cosplay y la creación de contenido.
       </p>
       <a
+        data-reveal
+        style="--reveal-delay:300ms"
         href="#"
-        class="group mt-10 inline-flex items-center gap-3 border border-coal/30 px-8 py-4 text-[0.66rem] uppercase tracking-[0.32em] text-coal transition-colors duration-300 hover:bg-coal hover:text-cream"
+        class="group mt-9 inline-flex items-center gap-3 border border-gold/50 px-8 py-4 text-[0.66rem] uppercase tracking-[0.32em] text-gold-bright transition-colors duration-300 hover:bg-gold hover:text-ink"
       >
         Ver la historia
         <span class="transition-transform duration-300 group-hover:translate-x-1.5">→</span>
       </a>
     </div>
+  </div>
 
-    <div class="relative" data-reveal style="--reveal-delay:150ms">
-      <div class="absolute -left-4 -top-4 h-full w-full border border-coal/20" aria-hidden="true"></div>
-      <img
-        src="/images/award.svg"
-        alt="Camila con la estatuilla del Martín Fierro Digital 2024"
-        width="900"
-        height="1100"
-        loading="lazy"
-        class="relative w-full object-cover"
-      />
-      <p class="mt-4 flex items-center gap-3 text-[0.58rem] uppercase tracking-[0.3em] text-coal/50">
-        <Star class="w-2 text-coal/40" /> APTRA · Buenos Aires · 2024
-      </p>
+  <!-- Barra de fotos: los demás premios -->
+  <div class="relative mx-auto mt-20 max-w-7xl px-6">
+    <p data-reveal class="flex items-center gap-3 text-[0.62rem] uppercase tracking-[0.4em] text-white/50">
+      Más reconocimientos <Star class="w-2 text-gold/70" />
+    </p>
+    <div
+      class="mt-6 flex snap-x snap-mandatory gap-4 overflow-x-auto pb-4 [scrollbar-width:thin] [scrollbar-color:var(--color-navy)_transparent] sm:grid sm:grid-cols-3 sm:overflow-visible sm:pb-0"
+    >
+      {
+        otherAwards.map((award, i) => (
+          <figure
+            class="group relative w-[220px] shrink-0 snap-start overflow-hidden border border-white/10 bg-ink-card transition-colors duration-500 hover:border-gold/50 sm:w-auto"
+            data-reveal
+            style={`--reveal-delay:${i * 110}ms`}
+          >
+            <img
+              src={award.img}
+              alt={`${award.title} — ${award.note}`}
+              width="900"
+              height="1200"
+              loading="lazy"
+              class="aspect-[3/4] w-full object-cover opacity-85 transition duration-500 group-hover:scale-[1.04] group-hover:opacity-100"
+            />
+            <div class="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink via-ink/10 to-transparent" />
+            <figcaption class="absolute inset-x-0 bottom-0 p-4">
+              <p class="font-display text-lg font-medium text-white">{award.title}</p>
+              <p class="mt-0.5 text-[0.56rem] uppercase tracking-[0.26em] text-gold-bright/80">{award.note}</p>
+            </figcaption>
+          </figure>
+        ))
+      }
     </div>
   </div>
 </section>

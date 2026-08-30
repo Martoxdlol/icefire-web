@@ -1,0 +1,124 @@
+---
+import Star from "./Star.astro";
+
+// TODO: reemplazar los SVG placeholder por las fotos reales de cada evento
+const events = [
+  {
+    img: "/images/events/event-1.svg",
+    tag: "Streaming",
+    title: "Programa OLGA",
+    note: "Invitada ×2",
+    featured: true,
+  },
+  {
+    img: "/images/events/event-2.svg",
+    tag: "Cobertura",
+    title: "Copa Aorus · CS 2025",
+    note: "Final del torneo",
+  },
+  {
+    img: "/images/events/event-3.svg",
+    tag: "Jurado",
+    title: "AGS Flow",
+    note: "Concurso de cosplay",
+  },
+  {
+    img: "/images/events/event-4.svg",
+    tag: "Campaña",
+    title: "Xbox · Hellblade II",
+    note: "Producción fotográfica oficial",
+  },
+  {
+    img: "/images/events/event-5.svg",
+    tag: "Prensa",
+    title: "Clarín",
+    note: "Nota destacada",
+  },
+  {
+    img: "/images/events/event-6.svg",
+    tag: "Collab",
+    title: "JBL Quantum",
+    note: "Activación de marca",
+  },
+];
+
+const roles = ["Presencias", "Jurado", "Paneles & charlas", "Coberturas"];
+---
+
+<section id="eventos" class="scroll-mt-16 border-t border-white/5 bg-ink-soft py-24 lg:py-32">
+  <div class="mx-auto max-w-7xl px-6">
+    <div class="flex flex-wrap items-end justify-between gap-6" data-reveal>
+      <div>
+        <p class="flex items-center gap-3 text-[0.64rem] uppercase tracking-[0.4em] text-steel">
+          Escenarios & media <Star class="w-2 text-ice/70" />
+        </p>
+        <h2 class="mt-4 font-display text-4xl font-medium tracking-[0.06em] text-white/90 sm:text-5xl">
+          EVENTOS <span class="text-ice">&</span> JURADO
+        </h2>
+      </div>
+      <a
+        href="#"
+        class="group inline-flex items-center gap-2 text-[0.64rem] uppercase tracking-[0.3em] text-white/50 transition-colors duration-300 hover:text-ice"
+      >
+        Ver todos los eventos
+        <span class="transition-transform duration-300 group-hover:translate-x-1">→</span>
+      </a>
+    </div>
+
+    <!-- Chips de roles -->
+    <ul class="mt-8 flex flex-wrap gap-3" data-reveal style="--reveal-delay:100ms">
+      {
+        roles.map((role) => (
+          <li class="flex items-center gap-2.5 border border-white/12 px-5 py-2.5 text-[0.6rem] uppercase tracking-[0.3em] text-white/60 transition-colors duration-300 hover:border-ice/40 hover:text-ice">
+            <Star class="w-2 text-ice/60" />
+            {role}
+          </li>
+        ))
+      }
+    </ul>
+
+    <!-- Mosaico: primera imagen destacada 2×2, el resto acompaña -->
+    <div class="mt-10 grid grid-cols-2 gap-4 lg:grid-cols-3">
+      {
+        events.map((event, i) => (
+          <figure
+            class={`group relative overflow-hidden border border-white/10 bg-ink-card transition-colors duration-500 hover:border-ice/50 ${
+              event.featured ? "col-span-2 row-span-2" : ""
+            } ${i === events.length - 1 ? "col-span-2 lg:col-span-1" : ""}`}
+            data-reveal
+            style={`--reveal-delay:${i * 80}ms`}
+          >
+            <img
+              src={event.img}
+              alt={`${event.title} — ${event.note}`}
+              width="800"
+              height="800"
+              loading="lazy"
+              class={`h-full w-full object-cover opacity-85 transition duration-700 ease-out group-hover:scale-[1.05] group-hover:opacity-100 ${
+                i === events.length - 1 ? "aspect-[2/1] lg:aspect-square" : "aspect-square"
+              }`}
+            />
+            <div class="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink via-ink/15 to-transparent" />
+            <span
+              class={`absolute left-4 top-4 border border-ice/30 bg-ink/60 px-3 py-1 text-[0.52rem] uppercase tracking-[0.3em] text-ice backdrop-blur-sm ${
+                event.featured ? "lg:px-4 lg:py-1.5" : ""
+              }`}
+            >
+              {event.tag}
+            </span>
+            <figcaption class="absolute inset-x-0 bottom-0 p-4 lg:p-5">
+              <p
+                class={`font-display font-medium text-white ${
+                  event.featured ? "text-2xl lg:text-4xl" : "text-lg lg:text-xl"
+                }`}
+              >
+                {event.title}
+              </p>
+              <p class="mt-1 text-[0.56rem] uppercase tracking-[0.26em] text-white/55">{event.note}</p>
+            </figcaption>
+          </figure>
+        ))
+      }
+    </div>
+  </div>
+</section>

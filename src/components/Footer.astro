@@ -1,58 +1,48 @@
 ---
-import Logo from "./Logo.astro";
+import Star from "./Star.astro";
 import SocialLinks from "./SocialLinks.astro";
-
-const links = [
-  { href: "#inicio", label: "Inicio" },
-  { href: "#cosplays", label: "Cosplays" },
-  { href: "#premios", label: "Premios" },
-  { href: "#eventos", label: "Eventos" },
-  { href: "#prensa", label: "Prensa" },
-  { href: "#contenido", label: "Contenido" },
-];
 ---
 
-<footer id="contacto" class="border-t border-white/8 bg-[#07080b]">
-  <div class="mx-auto grid max-w-7xl gap-12 px-6 py-16 md:grid-cols-3">
-    <div>
-      <Logo />
-      <p class="mt-6 max-w-xs text-[0.8rem] leading-relaxed text-white/45">
-        Cosplay es más que vestirse.<br />Es contar historias que inspiran.
+<footer id="contacto" class="relative overflow-hidden border-t border-white/8 bg-[#07080b]">
+  <div class="pointer-events-none absolute inset-0" aria-hidden="true">
+    <div class="absolute left-1/2 top-0 h-[24rem] w-[40rem] -translate-x-1/2 -translate-y-1/2 rounded-full bg-navy/30 blur-[120px]"></div>
+  </div>
+
+  <div class="relative mx-auto max-w-7xl px-6 py-24 text-center lg:py-32">
+    <p data-reveal class="flex items-center justify-center gap-4 text-[0.64rem] uppercase tracking-[0.5em] text-white/45">
+      <Star class="w-2 text-ice/60 animate-twinkle" />
+      Seguime en Instagram
+      <Star class="w-2 text-ice/60 animate-twinkle [animation-delay:1.2s]" />
+    </p>
+
+    <a
+      data-reveal
+      style="--reveal-delay:120ms"
+      href="https://www.instagram.com/ice_fire.cosplay/"
+      target="_blank"
+      rel="noopener"
+      class="group mt-8 inline-block"
+    >
+      <span class="block font-display text-[clamp(2.2rem,7vw,5.5rem)] font-medium leading-none tracking-[0.04em] text-ice/90 transition-colors duration-500 group-hover:text-ice-bright">
+        @ice_fire.cosplay
+      </span>
+      <span class="mx-auto mt-5 block h-px w-0 bg-gradient-to-r from-transparent via-ice to-transparent transition-all duration-700 group-hover:w-full"></span>
+    </a>
+
+    <SocialLinks class="mt-12 justify-center" />
+  </div>
+
+  <div class="relative border-t border-white/5">
+    <div class="mx-auto flex max-w-7xl flex-col items-center justify-between gap-3 px-6 py-6 sm:flex-row">
+      <p class="text-[0.58rem] uppercase tracking-[0.3em] text-white/30">
+        © 2026 Ice Fire Cosplay
       </p>
-    </div>
-
-    <nav aria-label="Secciones" class="md:justify-self-center">
-      <ul class="space-y-3">
-        {
-          links.map((link) => (
-            <li>
-              <a
-                href={link.href}
-                class="text-[0.64rem] uppercase tracking-[0.3em] text-white/50 transition-colors duration-300 hover:text-ice"
-              >
-                {link.label}
-              </a>
-            </li>
-          ))
-        }
-      </ul>
-    </nav>
-
-    <div class="md:justify-self-end md:text-right">
-      <p class="text-[0.64rem] uppercase tracking-[0.36em] text-white/40">Hablemos</p>
       <a
         href="mailto:icefire.cosplay@gmail.com"
-        class="mt-3 inline-block border-b border-ice/40 pb-1 font-display text-lg text-ice/90 transition-colors duration-300 hover:text-ice-bright"
+        class="text-[0.58rem] uppercase tracking-[0.3em] text-white/30 transition-colors duration-300 hover:text-ice"
       >
         icefire.cosplay@gmail.com
       </a>
-      <SocialLinks class="mt-8 md:justify-end" />
     </div>
-  </div>
-
-  <div class="border-t border-white/5">
-    <p class="mx-auto max-w-7xl px-6 py-6 text-center text-[0.58rem] uppercase tracking-[0.3em] text-white/30">
-      © 2026 Ice Fire Cosplay · Todos los derechos reservados
-    </p>
   </div>
 </footer>

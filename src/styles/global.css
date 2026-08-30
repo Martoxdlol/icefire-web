@@ -12,6 +12,9 @@
   --color-ice-bright: #d9ebf8;
   --color-steel: #7392ad;
   --color-navy: #2c4257;
+  --color-gold: #d9b36a;
+  --color-gold-bright: #ecd6a4;
+  --color-gold-deep: #b98f45;
 
   --font-display: "Cormorant Garamond", Georgia, "Times New Roman", serif;
   --font-body: "Jost", "Avenir Next", "Century Gothic", sans-serif;
@@ -67,6 +70,21 @@ body {
 /* Grano fotográfico sobre toda la página */
 .noise-layer {
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.55'/%3E%3C/svg%3E");
+}
+
+/* Degradados de texto */
+.text-gradient-ice {
+  background: linear-gradient(160deg, #f2f9ff 10%, var(--color-ice) 45%, var(--color-steel) 95%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.text-gradient-gold {
+  background: linear-gradient(160deg, #f6e8c6 5%, var(--color-gold) 50%, var(--color-gold-deep) 95%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }
 
 /* Entrada del hero */

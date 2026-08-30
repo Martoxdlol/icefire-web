@@ -6,20 +6,21 @@ const roles = ["Cosplayer", "Content Creator", "Concept Artist", "Judge"];
 ---
 
 <section id="inicio" class="relative flex min-h-svh flex-col overflow-hidden">
-  <!-- Imagen de fondo: la persona va centrada. TODO: reemplazar hero-bg.svg por la foto real -->
+  <!-- Imagen de fondo: la persona va centrada -->
   <img
-    src="/images/hero-bg.svg"
+    src="/images/hero.jpg"
     alt="Camila, Ice Fire Cosplay, retrato en personaje"
-    width="1920"
-    height="1280"
+    width="3000"
+    height="2003"
     class="absolute inset-0 h-full w-full object-cover object-center"
     fetchpriority="high"
   />
 
   <!-- Veladuras para legibilidad -->
   <div class="pointer-events-none absolute inset-0" aria-hidden="true">
-    <div class="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-ink/80 to-transparent"></div>
-    <div class="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-ink via-ink/40 to-transparent"></div>
+    <div class="absolute inset-0 bg-ink/25"></div>
+    <div class="absolute inset-x-0 top-0 h-56 bg-gradient-to-b from-ink/90 via-ink/40 to-transparent"></div>
+    <div class="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-ink via-ink/50 to-transparent"></div>
     <Star class="absolute right-[10%] top-[22%] w-3 text-ice/60 animate-twinkle" />
     <Star class="absolute left-[12%] top-[36%] w-2 text-ice/40 animate-twinkle [animation-delay:1.4s]" />
   </div>
@@ -27,7 +28,7 @@ const roles = ["Cosplayer", "Content Creator", "Concept Artist", "Judge"];
   <!-- Titular: nombre completo, sin separar -->
   <div class="relative z-10 mt-28 px-6 text-center lg:mt-32">
     <h1
-      class="hero-word font-display text-[clamp(3.6rem,13vw,12rem)] font-medium leading-[0.9] tracking-[0.04em] text-ice/90"
+      class="hero-word font-display text-[clamp(3.6rem,13vw,12rem)] font-medium leading-[0.9] tracking-[0.04em] text-ice-bright [text-shadow:0_2px_18px_rgba(7,8,11,0.85),0_10px_60px_rgba(7,8,11,0.6)]"
     >
       ICEFIRE
     </h1>
@@ -41,7 +42,7 @@ const roles = ["Cosplayer", "Content Creator", "Concept Artist", "Judge"];
       <ul class="space-y-2.5">
         {
           roles.map((role) => (
-            <li class="flex items-center gap-3 text-[0.7rem] uppercase tracking-[0.34em] text-white/70">
+            <li class="flex items-center gap-3 text-[0.7rem] uppercase tracking-[0.34em] text-white/85 [text-shadow:0_1px_10px_rgba(7,8,11,0.9)]">
               <Star class="w-2 text-ice/70" />
               {role}
             </li>
@@ -50,7 +51,7 @@ const roles = ["Cosplayer", "Content Creator", "Concept Artist", "Judge"];
       </ul>
       <a
         href="#cosplays"
-        class="group mt-9 inline-flex items-center gap-3 border border-white/25 px-7 py-3.5 text-[0.66rem] uppercase tracking-[0.32em] text-white/80 transition-colors duration-300 hover:border-ice hover:text-ice"
+        class="group mt-9 inline-flex items-center gap-3 border border-white/25 bg-white/10 px-7 py-3.5 text-[0.66rem] uppercase tracking-[0.32em] text-white/85 shadow-[0_8px_32px_rgba(0,0,0,0.35)] backdrop-blur-md transition-colors duration-300 hover:border-ice hover:bg-white/15 hover:text-ice"
       >
         Ver cosplays
         <Star class="w-2.5 transition-transform duration-500 group-hover:rotate-90" />
@@ -58,7 +59,7 @@ const roles = ["Cosplayer", "Content Creator", "Concept Artist", "Judge"];
     </div>
 
     <div data-reveal class="lg:text-right">
-      <p class="max-w-xs text-[0.72rem] leading-loose tracking-[0.22em] text-white/65 uppercase lg:ml-auto">
+      <p class="max-w-xs text-[0.72rem] leading-loose tracking-[0.22em] text-white/80 uppercase [text-shadow:0_1px_10px_rgba(7,8,11,0.9)] lg:ml-auto">
         Transformo personajes en experiencias reales combinando arte, performance y narrativa.
       </p>
       <SocialLinks class="mt-8 lg:justify-end" />
