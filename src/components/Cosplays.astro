@@ -1,0 +1,72 @@
+---
+import Star from "./Star.astro";
+
+// TODO: reemplazar los SVG placeholder por las fotos reales de cada cosplay
+const cosplays = [
+  { name: "Aloy", source: "Horizon Forbidden West", img: "/images/cosplays/aloy.svg" },
+  { name: "Malenia", source: "Elden Ring", img: "/images/cosplays/malenia.svg" },
+  { name: "She-Ra", source: "She-Ra and the Princesses of Power", img: "/images/cosplays/shera.svg" },
+  { name: "Loki", source: "Marvel", img: "/images/cosplays/loki.svg" },
+  { name: "Daenerys", source: "Game of Thrones", img: "/images/cosplays/daenerys.svg" },
+  { name: "Arthas", source: "World of Warcraft", img: "/images/cosplays/arthas.svg" },
+  { name: "Senua", source: "Hellblade II", img: "/images/cosplays/senua.svg" },
+  { name: "Zelda", source: "Tears of the Kingdom", img: "/images/cosplays/zelda.svg" },
+];
+---
+
+<section id="cosplays" class="relative mx-auto max-w-7xl scroll-mt-16 px-6 py-24 lg:py-32">
+  <div class="mb-14 flex flex-wrap items-end justify-between gap-6" data-reveal>
+    <div>
+      <p class="flex items-center gap-3 text-[0.64rem] uppercase tracking-[0.4em] text-steel">
+        Portfolio <Star class="w-2 text-ice/70" />
+      </p>
+      <h2 class="mt-4 font-display text-4xl font-medium tracking-[0.06em] text-white/90 sm:text-5xl">
+        COSPLAYS <span class="text-ice">DESTACADOS</span>
+      </h2>
+    </div>
+    <a
+      href="#"
+      class="group inline-flex items-center gap-2 text-[0.64rem] uppercase tracking-[0.3em] text-white/50 transition-colors duration-300 hover:text-ice"
+    >
+      Ver todos los cosplays
+      <span class="transition-transform duration-300 group-hover:translate-x-1">→</span>
+    </a>
+  </div>
+
+  <!-- Grilla editorial: alturas alternadas rompen la retícula -->
+  <div class="grid grid-cols-2 gap-4 sm:gap-6 lg:grid-cols-4">
+    {
+      cosplays.map((cosplay, i) => (
+        <article
+          data-reveal
+          style={`--reveal-delay:${(i % 4) * 90}ms`}
+          class={`group relative overflow-hidden border border-white/10 bg-ink-card transition-colors duration-500 hover:border-ice/50 ${i % 2 === 1 ? "lg:translate-y-10" : ""}`}
+        >
+          <div class="aspect-[3/4] overflow-hidden">
+            <img
+              src={cosplay.img}
+              alt={`Cosplay de ${cosplay.name} (${cosplay.source})`}
+              width="900"
+              height="1200"
+              loading="lazy"
+              class="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.06]"
+            />
+          </div>
+          <div class="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink via-ink/20 to-transparent" />
+          <span class="font-display absolute left-4 top-4 text-sm text-ice/50">
+            {String(i + 1).padStart(2, "0")}
+          </span>
+          <div class="absolute inset-x-0 bottom-0 p-5">
+            <Star class="w-2.5 text-ice/0 transition-all duration-500 group-hover:text-ice" />
+            <h3 class="mt-2 font-display text-2xl font-medium tracking-[0.08em] text-white uppercase">
+              {cosplay.name}
+            </h3>
+            <p class="mt-1 text-[0.58rem] uppercase tracking-[0.26em] text-white/50">
+              {cosplay.source}
+            </p>
+          </div>
+        </article>
+      ))
+    }
+  </div>
+</section>

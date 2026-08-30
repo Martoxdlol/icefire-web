@@ -1,0 +1,77 @@
+---
+import Star from "./Star.astro";
+import SocialLinks from "./SocialLinks.astro";
+
+const roles = ["Cosplayer", "Content Creator", "Concept Artist", "Judge"];
+---
+
+<section id="inicio" class="relative flex min-h-svh flex-col overflow-hidden">
+  <!-- Imagen de fondo: la persona va centrada. TODO: reemplazar hero-bg.svg por la foto real -->
+  <img
+    src="/images/hero-bg.svg"
+    alt="Camila, Ice Fire Cosplay, retrato en personaje"
+    width="1920"
+    height="1280"
+    class="absolute inset-0 h-full w-full object-cover object-center"
+    fetchpriority="high"
+  />
+
+  <!-- Veladuras para legibilidad -->
+  <div class="pointer-events-none absolute inset-0" aria-hidden="true">
+    <div class="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-ink/80 to-transparent"></div>
+    <div class="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-ink via-ink/40 to-transparent"></div>
+    <Star class="absolute right-[10%] top-[22%] w-3 text-ice/60 animate-twinkle" />
+    <Star class="absolute left-[12%] top-[36%] w-2 text-ice/40 animate-twinkle [animation-delay:1.4s]" />
+  </div>
+
+  <!-- Titular: nombre completo, sin separar -->
+  <div class="relative z-10 mt-28 px-6 text-center lg:mt-32">
+    <h1
+      class="hero-word font-display text-[clamp(3.6rem,13vw,12rem)] font-medium leading-[0.9] tracking-[0.04em] text-ice/90"
+    >
+      ICEFIRE
+    </h1>
+  </div>
+
+  <!-- Roles + sociales, anclados abajo -->
+  <div
+    class="relative z-10 mx-auto mt-auto flex w-full max-w-7xl flex-col gap-10 px-6 pb-14 lg:flex-row lg:items-end lg:justify-between lg:pb-20"
+  >
+    <div data-reveal>
+      <ul class="space-y-2.5">
+        {
+          roles.map((role) => (
+            <li class="flex items-center gap-3 text-[0.7rem] uppercase tracking-[0.34em] text-white/70">
+              <Star class="w-2 text-ice/70" />
+              {role}
+            </li>
+          ))
+        }
+      </ul>
+      <a
+        href="#cosplays"
+        class="group mt-9 inline-flex items-center gap-3 border border-white/25 px-7 py-3.5 text-[0.66rem] uppercase tracking-[0.32em] text-white/80 transition-colors duration-300 hover:border-ice hover:text-ice"
+      >
+        Ver cosplays
+        <Star class="w-2.5 transition-transform duration-500 group-hover:rotate-90" />
+      </a>
+    </div>
+
+    <div data-reveal class="lg:text-right">
+      <p class="max-w-xs text-[0.72rem] leading-loose tracking-[0.22em] text-white/65 uppercase lg:ml-auto">
+        Transformo personajes en experiencias reales combinando arte, performance y narrativa.
+      </p>
+      <SocialLinks class="mt-8 lg:justify-end" />
+    </div>
+  </div>
+
+  <!-- Indicador de scroll -->
+  <div
+    class="absolute bottom-24 right-6 z-10 hidden items-center gap-3 lg:flex"
+    style="writing-mode: vertical-rl"
+    aria-hidden="true"
+  >
+    <span class="text-[0.58rem] uppercase tracking-[0.5em] text-white/35">Scroll</span>
+    <span class="block h-14 w-px bg-gradient-to-b from-white/40 to-transparent animate-float"></span>
+  </div>
+</section>
