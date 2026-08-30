@@ -1,0 +1,122 @@
+---
+import Star from "./Star.astro";
+
+// TODO: reemplazar los SVG placeholder por las fotos reales de cada cosplay
+const cosplays = [
+  { name: "Aloy", source: "Horizon Forbidden West", img: "/images/cosplays/aloy.svg" },
+  { name: "Malenia", source: "Elden Ring", img: "/images/cosplays/malenia.svg" },
+  { name: "She-Ra", source: "She-Ra and the Princesses of Power", img: "/images/cosplays/shera.svg" },
+  { name: "Loki", source: "Marvel", img: "/images/cosplays/loki.svg" },
+  { name: "Daenerys", source: "Game of Thrones", img: "/images/cosplays/daenerys.svg" },
+  { name: "Arthas", source: "World of Warcraft", img: "/images/cosplays/arthas.svg" },
+  { name: "Senua", source: "Hellblade II", img: "/images/cosplays/senua.svg" },
+  { name: "Zelda", source: "Tears of the Kingdom", img: "/images/cosplays/zelda.svg" },
+];
+---
+
+<section id="cosplays" class="relative scroll-mt-16 py-24 lg:py-32">
+  <div class="mx-auto max-w-7xl px-6">
+    <div class="flex flex-wrap items-end justify-between gap-6" data-reveal>
+      <div>
+        <p class="flex items-center gap-3 text-[0.64rem] uppercase tracking-[0.4em] text-steel">
+          Portfolio <Star class="w-2 text-ice/70" />
+        </p>
+        <h2 class="mt-4 font-display text-4xl font-medium tracking-[0.06em] text-white/90 sm:text-5xl">
+          COSPLAYS <span class="text-ice">DESTACADOS</span>
+        </h2>
+      </div>
+      <a
+        href="#"
+        class="group inline-flex items-center gap-2 text-[0.64rem] uppercase tracking-[0.3em] text-white/50 transition-colors duration-300 hover:text-ice"
+      >
+        Ver todos los cosplays
+        <span class="transition-transform duration-300 group-hover:translate-x-1">→</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- Dos filas que se desplazan juntas en horizontal -->
+  <div class="relative mt-12">
+    <div
+      id="cosplays-track"
+      class="grid snap-x snap-proximity grid-flow-col grid-rows-2 gap-5 overflow-x-auto px-6 pb-8 scroll-pl-6 auto-cols-[190px] sm:auto-cols-[230px] lg:auto-cols-[260px] [scrollbar-width:thin] [scrollbar-color:var(--color-navy)_transparent] lg:px-[max(1.5rem,calc((100vw-80rem)/2+1.5rem))] lg:scroll-pl-[max(1.5rem,calc((100vw-80rem)/2+1.5rem))]"
+    >
+    {
+      cosplays.map((cosplay, i) => (
+        <article
+          class="group relative snap-start overflow-hidden border border-white/10 bg-ink-card transition-colors duration-500 hover:border-ice/50"
+          data-reveal
+          style={`--reveal-delay:${(i % 4) * 90}ms`}
+        >
+          <div class="aspect-[3/4] overflow-hidden">
+            <img
+              src={cosplay.img}
+              alt={`Cosplay de ${cosplay.name} (${cosplay.source})`}
+              width="900"
+              height="1200"
+              loading="lazy"
+              class="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.06]"
+            />
+          </div>
+          <div class="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink via-ink/20 to-transparent" />
+          <div class="absolute inset-x-0 bottom-0 p-5">
+            <Star class="w-2.5 text-ice/0 transition-all duration-500 group-hover:text-ice" />
+            <h3 class="mt-2 font-display text-2xl font-medium tracking-[0.08em] text-white uppercase">
+              {cosplay.name}
+            </h3>
+            <p class="mt-1 text-[0.58rem] uppercase tracking-[0.26em] text-white/50">
+              {cosplay.source}
+            </p>
+          </div>
+        </article>
+      ))
+    }
+    </div>
+
+    <!-- Flechas: solo visibles cuando hay más para scrollear en esa dirección -->
+    {
+      [
+        { dir: -1, label: "Cosplays anteriores", class: "left-3 lg:left-6", path: "M15 5 L8 12 L15 19" },
+        { dir: 1, label: "Más cosplays", class: "right-3 lg:right-6", path: "M9 5 L16 12 L9 19" },
+      ].map((arrow) => (
+        <button
+          type="button"
+          data-dir={arrow.dir}
+          aria-label={arrow.label}
+          class={`cosplays-arrow pointer-events-none absolute top-1/2 z-10 flex size-11 -translate-y-1/2 items-center justify-center rounded-full border border-white/20 bg-ink/60 text-ice opacity-0 shadow-[0_8px_32px_rgba(0,0,0,0.45)] backdrop-blur-md transition-all duration-300 hover:border-ice hover:text-ice-bright ${arrow.class}`}
+        >
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="w-4" aria-hidden="true">
+            <path d={arrow.path} />
+          </svg>
+        </button>
+      ))
+    }
+  </div>
+</section>
+
+<script>
+  const track = document.getElementById("cosplays-track");
+  const arrows = document.querySelectorAll<HTMLButtonElement>(".cosplays-arrow");
+
+  if (track) {
+    const update = () => {
+      const max = track.scrollWidth - track.clientWidth - 1;
+      arrows.forEach((arrow) => {
+        const dir = Number(arrow.dataset.dir);
+        const canScroll = dir < 0 ? track.scrollLeft > 1 : track.scrollLeft < max;
+        arrow.classList.toggle("opacity-0", !canScroll);
+        arrow.classList.toggle("pointer-events-none", !canScroll);
+      });
+    };
+
+    arrows.forEach((arrow) => {
+      arrow.addEventListener("click", () => {
+        track.scrollBy({ left: Number(arrow.dataset.dir) * track.clientWidth * 0.8, behavior: "smooth" });
+      });
+    });
+
+    track.addEventListener("scroll", update, { passive: true });
+    window.addEventListener("resize", update);
+    update();
+  }
+</script>
