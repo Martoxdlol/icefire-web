@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1280" viewBox="0 0 1920 1280">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="38%" r="90%">
+      <stop offset="0%" stop-color="hsl(208 38% 24%)"/>
+      <stop offset="55%" stop-color="hsl(208 32% 12%)"/>
+      <stop offset="100%" stop-color="#07090c"/>
+    </radialGradient>
+    <radialGradient id="halo" cx="50%" cy="42%" r="30%">
+      <stop offset="0%" stop-color="hsl(208 60% 78%)" stop-opacity="0.16"/>
+      <stop offset="100%" stop-color="hsl(208 60% 78%)" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="fig" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="hsl(208 45% 60%)" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="hsl(208 45% 40%)" stop-opacity="0.08"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1920" height="1280" fill="url(#bg)"/>
+  <rect width="1920" height="1280" fill="url(#halo)"/>
+
+  <!-- Silueta placeholder: la persona va centrada -->
+  <g transform="translate(960 300)" fill="url(#fig)">
+    <circle cx="0" cy="90" r="88"/>
+    <path d="M-160 980 C-175 640 -150 330 -95 235 C-60 200 60 200 95 235 C150 330 175 640 160 980 Z"/>
+  </g>
+
+  <g transform="translate(910 120) scale(1.0)" fill="hsl(208 60% 78%)" opacity="0.16">
+    <path d="M50 0 C53 32 62 44 100 50 C62 56 53 68 50 100 C47 68 38 56 0 50 C38 44 47 32 50 0 Z"/>
+  </g>
+  <g transform="translate(330 640) scale(0.55)" fill="hsl(208 60% 78%)" opacity="0.10">
+    <path d="M50 0 C53 32 62 44 100 50 C62 56 53 68 50 100 C47 68 38 56 0 50 C38 44 47 32 50 0 Z"/>
+  </g>
+  <g transform="translate(1540 520) scale(0.7)" fill="hsl(208 60% 78%)" opacity="0.12">
+    <path d="M50 0 C53 32 62 44 100 50 C62 56 53 68 50 100 C47 68 38 56 0 50 C38 44 47 32 50 0 Z"/>
+  </g>
+
+  <rect x="28" y="28" width="1864" height="1224" fill="none" stroke="hsl(208 45% 72%)" stroke-opacity="0.16" stroke-width="2"/>
+  <text x="50%" y="96%" font-family="Georgia, 'Times New Roman', serif" font-size="30" letter-spacing="10" fill="#e9eff6" fill-opacity="0.45" text-anchor="middle">FOTO HERO · PERSONA CENTRADA</text>
+</svg>

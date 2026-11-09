@@ -1,0 +1,84 @@
+---
+interface Props {
+  images: { src: string; alt: string }[];
+  fit?: "cover" | "contain";
+  class?: string;
+}
+
+const { images, fit = "cover", class: className = "" } = Astro.props;
+---
+
+<div data-carousel class={`relative overflow-hidden ${className}`}>
+  <div
+    data-track
+    class="flex h-full snap-x snap-mandatory overflow-x-auto overscroll-x-contain [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+  >
+    {
+      images.map((image) => (
+        <img
+          src={image.src}
+          alt={image.alt}
+          loading="lazy"
+          class={`h-full w-full shrink-0 snap-center ${fit === "contain" ? "object-contain" : "object-cover"}`}
+        />
+      ))
+    }
+  </div>
+
+  {
+    images.length > 1 && (
+      <>
+        {[
+          { step: -1, label: "Foto anterior", class: "left-3", path: "M15 5 L8 12 L15 19" },
+          { step: 1, label: "Foto siguiente", class: "right-3", path: "M9 5 L16 12 L9 19" },
+        ].map((arrow) => (
+          <button
+            type="button"
+            data-step={arrow.step}
+            aria-label={arrow.label}
+            class={`absolute top-1/2 flex size-9 -translate-y-1/2 items-center justify-center rounded-full border border-white/20 bg-ink/60 text-ice backdrop-blur-md transition-all duration-300 hover:border-ice hover:text-ice-bright disabled:pointer-events-none disabled:opacity-0 ${arrow.class}`}
+          >
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="w-3.5" aria-hidden="true">
+              <path d={arrow.path} />
+            </svg>
+          </button>
+        ))}
+        <div class="pointer-events-none absolute inset-x-0 bottom-4 flex justify-center gap-1.5" aria-hidden="true">
+          {images.map((_, i) => (
+            <span data-dot class={`size-1.5 rounded-full transition-colors duration-300 ${i === 0 ? "bg-ice" : "bg-white/35"}`} />
+          ))}
+        </div>
+      </>
+    )
+  }
+</div>
+
+<script>
+  document.querySelectorAll<HTMLElement>("[data-carousel]").forEach((carousel) => {
+    const track = carousel.querySelector<HTMLElement>("[data-track]");
+    const dots = carousel.querySelectorAll<HTMLElement>("[data-dot]");
+    const arrows = carousel.querySelectorAll<HTMLButtonElement>("[data-step]");
+    if (!track || dots.length < 2) return;
+
+    const update = () => {
+      const index = track.clientWidth ? Math.round(track.scrollLeft / track.clientWidth) : 0;
+      dots.forEach((dot, i) => {
+        dot.classList.toggle("bg-ice", i === index);
+        dot.classList.toggle("bg-white/35", i !== index);
+      });
+      arrows.forEach((arrow) => {
+        arrow.disabled = Number(arrow.dataset.step) < 0 ? index === 0 : index === dots.length - 1;
+      });
+    };
+
+    arrows.forEach((arrow) => {
+      arrow.addEventListener("click", (event) => {
+        event.stopPropagation();
+        track.scrollBy({ left: Number(arrow.dataset.step) * track.clientWidth, behavior: "smooth" });
+      });
+    });
+
+    track.addEventListener("scroll", update, { passive: true });
+    update();
+  });
+</script>

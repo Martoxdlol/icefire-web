@@ -1,0 +1,46 @@
+---
+import Star from "./Star.astro";
+
+interface Props {
+  target: string;
+  options: string[];
+  label: string;
+  allLabel?: string;
+  class?: string;
+}
+
+const { target, options, label, allLabel = "Todos", class: className = "" } = Astro.props;
+---
+
+<div role="group" aria-label={label} data-filter={target} class={`flex flex-wrap gap-3 ${className}`}>
+  {
+    ["", ...options].map((option) => (
+      <button
+        type="button"
+        data-value={option}
+        aria-pressed={option === "" ? "true" : "false"}
+        class="group flex items-center gap-2.5 border border-white/12 px-5 py-2.5 text-[0.6rem] uppercase tracking-[0.3em] text-white/60 transition-colors duration-300 hover:border-ice/40 hover:text-ice aria-pressed:border-ice/60 aria-pressed:bg-ice/10 aria-pressed:text-ice"
+      >
+        <Star class="w-2 text-ice/40 transition-transform duration-500 group-aria-pressed:rotate-45 group-aria-pressed:text-ice" />
+        {option || allLabel}
+      </button>
+    ))
+  }
+</div>
+
+<script>
+  document.querySelectorAll<HTMLElement>("[data-filter]").forEach((group) => {
+    const items = document.querySelectorAll<HTMLElement>(`#${group.dataset.filter} [data-category]`);
+    const buttons = group.querySelectorAll<HTMLButtonElement>("button");
+
+    buttons.forEach((button) => {
+      button.addEventListener("click", () => {
+        const value = button.dataset.value;
+        buttons.forEach((b) => b.setAttribute("aria-pressed", String(b === button)));
+        items.forEach((item) => {
+          item.hidden = Boolean(value) && item.dataset.category !== value;
+        });
+      });
+    });
+  });
+</script>
