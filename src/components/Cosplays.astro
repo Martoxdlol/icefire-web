@@ -1,17 +1,9 @@
 ---
 import Star from "./Star.astro";
+import ViewAllButton from "./ViewAllButton.astro";
+import { cosplays as allCosplays } from "../data/cosplays";
 
-// TODO: reemplazar los SVG placeholder por las fotos reales de cada cosplay
-const cosplays = [
-  { name: "Aloy", source: "Horizon Forbidden West", img: "/images/cosplays/aloy.svg" },
-  { name: "Malenia", source: "Elden Ring", img: "/images/cosplays/malenia.svg" },
-  { name: "She-Ra", source: "She-Ra and the Princesses of Power", img: "/images/cosplays/shera.svg" },
-  { name: "Loki", source: "Marvel", img: "/images/cosplays/loki.svg" },
-  { name: "Daenerys", source: "Game of Thrones", img: "/images/cosplays/daenerys.svg" },
-  { name: "Arthas", source: "World of Warcraft", img: "/images/cosplays/arthas.svg" },
-  { name: "Senua", source: "Hellblade II", img: "/images/cosplays/senua.svg" },
-  { name: "Zelda", source: "Tears of the Kingdom", img: "/images/cosplays/zelda.svg" },
-];
+const cosplays = allCosplays.filter((cosplay) => cosplay.featured);
 ---
 
 <section id="cosplays" class="relative scroll-mt-16 py-24 lg:py-32">
@@ -26,7 +18,7 @@ const cosplays = [
         </h2>
       </div>
       <a
-        href="#"
+        href="/cosplays"
         class="group inline-flex items-center gap-2 text-[0.64rem] uppercase tracking-[0.3em] text-white/50 transition-colors duration-300 hover:text-ice"
       >
         Ver todos los cosplays
@@ -50,7 +42,7 @@ const cosplays = [
         >
           <div class="aspect-[3/4] overflow-hidden">
             <img
-              src={cosplay.img}
+              src={cosplay.photos[0]}
               alt={`Cosplay de ${cosplay.name} (${cosplay.source})`}
               width="900"
               height="1200"
@@ -92,6 +84,8 @@ const cosplays = [
       ))
     }
   </div>
+
+  <ViewAllButton href="/cosplays" label="Ver todos" class="mx-auto mt-10 max-w-7xl px-6" />
 </section>
 
 <script>

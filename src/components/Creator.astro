@@ -1,5 +1,6 @@
 ---
 import Star from "./Star.astro";
+import ViewAllButton from "./ViewAllButton.astro";
 
 // Qué puedo ofrecer, cada servicio con su foto
 // TODO: reemplazar los SVG placeholder por fotos reales de cada tipo de contenido
@@ -81,6 +82,8 @@ const metrics = [
         ))
       }
     </div>
+
+    <ViewAllButton href="/contenido" label="Ver todo" class="mt-14 lg:mt-24" />
 
     <!-- Métricas, discretas al pie de la sección -->
     <div data-reveal class="mt-20 border-t border-white/10 pt-7 lg:mt-28">

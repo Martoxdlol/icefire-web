@@ -3,11 +3,13 @@ import Logo from "./Logo.astro";
 import Star from "./Star.astro";
 
 const links = [
-  { href: "#cosplays", label: "Cosplays" },
-  { href: "#premios", label: "Premios" },
-  { href: "#eventos", label: "Eventos" },
-  { href: "#contenido", label: "Contenido" },
+  { href: "/cosplays", label: "Cosplays" },
+  { href: "/#premios", label: "Premios" },
+  { href: "/#eventos", label: "Eventos" },
+  { href: "/contenido", label: "Contenido" },
 ];
+
+const path = Astro.url.pathname.replace(/\/$/, "");
 ---
 
 <header class="fixed inset-x-0 top-0 z-50 border-b border-white/5 bg-ink/70 backdrop-blur-md">
@@ -18,7 +20,8 @@ const links = [
         links.map((link) => (
           <a
             href={link.href}
-            class="text-[0.66rem] uppercase tracking-[0.3em] text-white/55 transition-colors duration-300 hover:text-ice"
+            aria-current={link.href === path ? "page" : undefined}
+            class="text-[0.66rem] uppercase tracking-[0.3em] text-white/55 transition-colors duration-300 hover:text-ice aria-[current=page]:text-ice"
           >
             {link.label}
           </a>

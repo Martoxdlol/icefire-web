@@ -1,0 +1,103 @@
+---
+// Visor modal: los paneles van en el slot con data-panel={slug} y hidden,
+// y se abren desde botones con data-open={id} y data-slug={slug}.
+interface Props {
+  id: string;
+  label: string;
+}
+
+const { id, label } = Astro.props;
+---
+
+<dialog
+  id={id}
+  data-lightbox
+  aria-label={label}
+  class="m-0 size-full max-h-none max-w-none overflow-y-auto bg-transparent p-0 text-white/80 backdrop:bg-ink/90 backdrop:backdrop-blur-md"
+>
+  <button
+    type="button"
+    data-close
+    autofocus
+    aria-label="Cerrar"
+    class="fixed right-4 top-4 z-10 flex size-11 items-center justify-center rounded-full border border-white/20 bg-ink/60 text-ice backdrop-blur-md transition-colors duration-300 hover:border-ice hover:text-ice-bright"
+  >
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="w-4" aria-hidden="true">
+      <path d="M6 6 L18 18 M18 6 L6 18"></path>
+    </svg>
+  </button>
+
+  <div data-stage class="flex min-h-full items-center justify-center px-4 pb-10 pt-20 sm:px-20 sm:py-16">
+    <slot />
+  </div>
+
+  {
+    [
+      { step: -1, label: "Anterior", class: "left-4 lg:left-6", path: "M15 5 L8 12 L15 19" },
+      { step: 1, label: "Siguiente", class: "right-4 lg:right-6", path: "M9 5 L16 12 L9 19" },
+    ].map((arrow) => (
+      <button
+        type="button"
+        data-nav={arrow.step}
+        aria-label={arrow.label}
+        class={`fixed top-1/2 z-10 hidden size-11 -translate-y-1/2 items-center justify-center rounded-full border border-white/20 bg-ink/60 text-ice backdrop-blur-md transition-colors duration-300 hover:border-ice hover:text-ice-bright sm:flex ${arrow.class}`}
+      >
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="w-4" aria-hidden="true">
+          <path d={arrow.path} />
+        </svg>
+      </button>
+    ))
+  }
+</dialog>
+
+<script>
+  document.querySelectorAll<HTMLDialogElement>("dialog[data-lightbox]").forEach((dialog) => {
+    const triggers = [...document.querySelectorAll<HTMLElement>(`[data-open="${dialog.id}"]`)];
+    const panels = dialog.querySelectorAll<HTMLElement>("[data-panel]");
+    const navs = dialog.querySelectorAll<HTMLButtonElement>("[data-nav]");
+    let current = "";
+
+    const visibleSlugs = () => triggers.filter((t) => !t.closest("[hidden]")).map((t) => t.dataset.slug ?? "");
+
+    const show = (slug: string) => {
+      current = slug;
+      panels.forEach((panel) => {
+        panel.hidden = panel.dataset.panel !== slug;
+        if (panel.hidden) return;
+        panel.querySelectorAll<HTMLElement>("[data-track]").forEach((track) => {
+          track.scrollLeft = 0;
+          track.dispatchEvent(new Event("scroll"));
+        });
+      });
+      const single = visibleSlugs().length < 2;
+      navs.forEach((nav) => nav.classList.toggle("sm:flex", !single));
+      dialog.scrollTop = 0;
+    };
+
+    const step = (dir: number) => {
+      const slugs = visibleSlugs();
+      const i = slugs.indexOf(current);
+      show(slugs[(i + dir + slugs.length) % slugs.length]);
+    };
+
+    triggers.forEach((trigger) => {
+      trigger.addEventListener("click", () => {
+        show(trigger.dataset.slug ?? "");
+        dialog.showModal();
+      });
+    });
+
+    navs.forEach((nav) => nav.addEventListener("click", () => step(Number(nav.dataset.nav))));
+    dialog.querySelector("[data-close]")?.addEventListener("click", () => dialog.close());
+
+    dialog.addEventListener("click", (event) => {
+      const target = event.target as HTMLElement;
+      if (target === dialog || target.hasAttribute("data-stage")) dialog.close();
+    });
+
+    dialog.addEventListener("keydown", (event) => {
+      if (event.key === "ArrowRight") step(1);
+      if (event.key === "ArrowLeft") step(-1);
+    });
+  });
+</script>
